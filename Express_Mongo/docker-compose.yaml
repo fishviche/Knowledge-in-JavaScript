@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+
+  mongo_db:
+    image: mongo
+    restart: always
+  app:
+    build: .
+    environment:
+      DB_MONGO_URI: 'mongodb://mongo_db:27017/express-crud'
+    command:
+      - node
+      - index.js
+    ports:
+    - "3001:3000"
