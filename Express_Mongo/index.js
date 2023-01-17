@@ -10,9 +10,7 @@ const { createNewProduct, getOneProduct, getProducts, deleteProduct, updateProdu
 app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.json());
-mongoose.connect(MONGODB_URI, {
-
-})
+mongoose.connect(MONGODB_URI)
 .then(() => console.log('Connected!'))
 .catch(err => console.log(err));
 
