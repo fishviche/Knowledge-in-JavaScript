@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:14
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_PASSWORD: xxxx
+      POSTGRES_USER: xxx
+    volumes:
+     - postgres:/var/lib/postgresql/data
+    # command: sh -c "npm run migration && npm run start"
+    networks:
+     - node-network
+  api:
+    build: .
+    command:
+     - node
+     - src/index.js
+    ports:
+     - 3005:3000
+    depends_on:
+     - db
+    networks:
+     - node-network
+
+volumes:
+  postgres:
+
+networks:
+  node-network:
+    driver: bridge
